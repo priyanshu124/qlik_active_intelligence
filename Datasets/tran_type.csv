@@ -1,0 +1,5 @@
+tran_type_id,tran_type
+1,DEBIT
+2,TRANSFER
+3,CASH
+4,PAYMENT

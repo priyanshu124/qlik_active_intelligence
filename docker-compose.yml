@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: qlik-mysqldb
+    command: mysqld --default-authentication-plugin=mysql_native_password --default-time-zone=+05:30
+    restart: unless-stopped
+    environment:
+      #MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: qlik-user
+      MYSQL_PASSWORD: qlik123
+      MYSQL_DATABASE: qlikdb 
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./Datasets:/var/lib/mysql-files/datasets
+      #- ./etc/mysql:/etc
+    ports:
+      - '3306:3306'
+
+    networks:
+      - airflow_mysql-airflow
+
+networks:
+  airflow_mysql-airflow:
+    external: true
+
